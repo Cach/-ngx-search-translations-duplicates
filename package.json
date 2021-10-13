@@ -1,0 +1,40 @@
+{
+  "name": "ngx-search-translations-duplicates",
+  "version": "1.0.0",
+  "description": "The library for searching a duplicate in translations",
+  "main": "build/index.js",
+  "types": "build/types.d.ts",
+  "scripts": {
+    "start": "ts-node index.ts",
+    "build": "tsc",
+    "lint": "npx eslint . --ext .ts",
+    "lint:fix": "npx eslint . --ext .ts --fix"
+  },
+  "author": "Cach",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/Cach/ngx-search-translations-duplicates"
+  },
+  "homepage": "https://github.com/Cach/ngx-search-translations-duplicates",
+  "keywords": [
+    "angular",
+    "angular translations",
+    "angular translations duplicates",
+    "translations",
+    "translations duplicates",
+    "search duplicates"
+  ],
+  "devDependencies": {
+    "@types/node": "^16.10.3",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "typescript": "^4.4.3"
+  },
+  "bin": {
+    "ngx-search-translations-duplicates": "./build/index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
