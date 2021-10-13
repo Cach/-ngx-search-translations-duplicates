@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
+import { CONFIG_FILE, DEFAULT_OUTPUT_FILE } from './constants';
 import { Config } from './types';
 import { readJsonFile, writeOutputFile } from './utils/filesystem.utils';
 import { searchDuplicates } from './utils/translations.utils';
-import chalk from 'chalk';
-
-const CONFIG_FILE = '.duplicatesconfig';
-const DEFAULT_OUTPUT_FILE = './translations_duplicates.json';
 
 let config: Config = {
   translationFile: './translation.json',
@@ -32,7 +30,13 @@ const run = async(): Promise<void> => {
     throw new Error(e);
   }
 
-  const duplicates = await searchDuplicates(config.translationFile);
+  let duplicates = await searchDuplicates(config.translationFile);
+
+  if (config?.orderByCount) {
+    duplicates = Object.fromEntries(
+      Object.entries(duplicates).sort(([, a], [, b]) => b.length - a.length)
+    );
+  }
 
   const outputFile = config.outputFile ?? DEFAULT_OUTPUT_FILE;
 

@@ -43,6 +43,7 @@ npx ngx-search-translations-duplicates
 | --- | --- | --- | --- | --- |
 | translationFile | string | yes | | path to file with translations |
 | showTotalCount | boolean | no | false | show total of searched zombies keys |
+| orderByCount | boolean | no | false | sorting a keys from a most number of duplicates to the less |
 | outputFile | string | no | ./translations_duplicates.json | path to file where result should be written |
 
 #### Example

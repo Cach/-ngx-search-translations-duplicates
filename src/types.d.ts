@@ -2,6 +2,7 @@ export interface Config {
   translationFile: string;
   outputFile?: string | null;
   showTotalCount?: boolean;
+  orderByCount?: boolean;
 }
 
 export interface Translation {
