@@ -13,22 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const chalk_1 = __importDefault(require("chalk"));
+const constants_1 = require("./constants");
 const filesystem_utils_1 = require("./utils/filesystem.utils");
 const translations_utils_1 = require("./utils/translations.utils");
-const chalk_1 = __importDefault(require("chalk"));
-const CONFIG_FILE = '.duplicatesconfig';
-const DEFAULT_OUTPUT_FILE = './translations_duplicates.json';
 let config = {
     translationFile: './translation.json',
     showTotalCount: false
 };
 const loadConfig = () => {
     return new Promise((resolve, reject) => {
-        const config = (0, filesystem_utils_1.readJsonFile)(CONFIG_FILE);
+        const config = (0, filesystem_utils_1.readJsonFile)(constants_1.CONFIG_FILE);
         if (config) {
             resolve(config);
         }
-        reject(`File ${CONFIG_FILE} is empty or not exist`);
+        reject(`File ${constants_1.CONFIG_FILE} is empty or not exist`);
     });
 };
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -39,8 +38,11 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (e) {
         throw new Error(e);
     }
-    const duplicates = yield (0, translations_utils_1.searchDuplicates)(config.translationFile);
-    const outputFile = (_a = config.outputFile) !== null && _a !== void 0 ? _a : DEFAULT_OUTPUT_FILE;
+    let duplicates = yield (0, translations_utils_1.searchDuplicates)(config.translationFile);
+    if (config === null || config === void 0 ? void 0 : config.orderByCount) {
+        duplicates = Object.fromEntries(Object.entries(duplicates).sort(([, a], [, b]) => b.length - a.length));
+    }
+    const outputFile = (_a = config.outputFile) !== null && _a !== void 0 ? _a : constants_1.DEFAULT_OUTPUT_FILE;
     (0, filesystem_utils_1.writeOutputFile)(outputFile, duplicates);
     if (config.showTotalCount) {
         console.log(chalk_1.default.yellow(`Total: ${chalk_1.default.bold(Object.keys(duplicates).length)}`));
