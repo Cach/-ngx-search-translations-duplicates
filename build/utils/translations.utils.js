@@ -26,7 +26,7 @@ const makeTranslationKey = (data, parentKey = '') => {
     });
 };
 exports.makeTranslationKey = makeTranslationKey;
-const searchDuplicates = (file) => {
+const searchDuplicates = (file, limit = 2) => {
     return new Promise((resolve) => __awaiter(void 0, void 0, void 0, function* () {
         const dataJson = (0, filesystem_utils_1.readJsonFile)(file);
         if (!dataJson) {
@@ -45,7 +45,7 @@ const searchDuplicates = (file) => {
             duplicates[value].push(translationKey);
         }
         Object.entries(duplicates)
-            .filter(([, value]) => value.length <= 1)
+            .filter(([, value]) => value.length < limit)
             .forEach(([key]) => delete duplicates[key]);
         resolve(duplicates);
     }));

@@ -1,6 +1,6 @@
 {
   "name": "ngx-search-translations-duplicates",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The library for searching a duplicate in translations",
   "main": "build/index.js",
   "types": "build/types.d.ts",

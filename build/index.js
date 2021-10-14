@@ -38,7 +38,8 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     catch (e) {
         throw new Error(e);
     }
-    let duplicates = yield (0, translations_utils_1.searchDuplicates)(config.translationFile);
+    const minCount = (config === null || config === void 0 ? void 0 : config.minCount) ? +config.minCount : 2;
+    let duplicates = yield (0, translations_utils_1.searchDuplicates)(config.translationFile, minCount);
     if (config === null || config === void 0 ? void 0 : config.orderByCount) {
         duplicates = Object.fromEntries(Object.entries(duplicates).sort(([, a], [, b]) => b.length - a.length));
     }
