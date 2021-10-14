@@ -1,6 +1,7 @@
 export interface Config {
   translationFile: string;
-  outputFile?: string | null;
+  outputFile?: string;
+  minCount?: number;
   showTotalCount?: boolean;
   orderByCount?: boolean;
 }

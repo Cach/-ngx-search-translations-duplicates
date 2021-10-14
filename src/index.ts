@@ -30,7 +30,9 @@ const run = async(): Promise<void> => {
     throw new Error(e);
   }
 
-  let duplicates = await searchDuplicates(config.translationFile);
+  const minCount = config?.minCount ? +config.minCount : 2;
+
+  let duplicates = await searchDuplicates(config.translationFile, minCount);
 
   if (config?.orderByCount) {
     duplicates = Object.fromEntries(

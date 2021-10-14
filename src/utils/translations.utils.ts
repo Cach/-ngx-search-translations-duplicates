@@ -20,7 +20,7 @@ export const makeTranslationKey = (data: Translation, parentKey = ''): Content =
   });
 }
 
-export const searchDuplicates = (file: string): Promise<Duplicates> => {
+export const searchDuplicates = (file: string, limit = 2): Promise<Duplicates> => {
   return new Promise(async (resolve) => {
     const dataJson = readJsonFile<Translation>(file);
 
@@ -47,7 +47,7 @@ export const searchDuplicates = (file: string): Promise<Duplicates> => {
     }
 
     Object.entries(duplicates)
-      .filter(([, value]) => value.length <= 1)
+      .filter(([, value]) => value.length < limit)
       .forEach(([key]) => delete duplicates[key]);
 
     resolve(duplicates);
